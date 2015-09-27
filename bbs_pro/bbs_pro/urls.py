@@ -14,4 +14,5 @@ urlpatterns += patterns('bbs_pro.views',
 	url(r'^logout/$','Logout'),
 	url(r'^acc_login/$','acc_login'),
 	url(r'^login/$','Login'),
+
 	)

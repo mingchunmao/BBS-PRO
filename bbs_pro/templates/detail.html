@@ -6,20 +6,24 @@
 
 		<h4>{{ bbs.title }}</h4>
 		<p>{{ bbs.author }}</p>
-		{{ bbs.content }}<br>
+		{{ bbs.content|safe}}<br>
 
 		<hr>
 		{% get_comment_count for bbs as comment_count %}
 			{{ comment_count }}
 
 		<hr>		
-		    
+		{% if user.is_authenticated %} 
 		    <form action="/sub_comment/" method="POST">
 			    {% csrf_token %}
 			    <textarea  cols=80 rows=3 name="comment_comment"></textarea>
 			    <input type="hidden" name="bbs_id" value="{{bbs.id}}" /><br>
 			    <input type="submit" name="Add comment" id = "id_submit" />
 		    </form>
+
+		{% else %}
+		<p>如果要评论，请登录</p>
+		{% endif %}
 		
 
 		

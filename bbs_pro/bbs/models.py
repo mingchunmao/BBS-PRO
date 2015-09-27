@@ -5,13 +5,14 @@ from django.contrib.auth.models import User
 
 class BBS(models.Model):
 	title = models.CharField(max_length = 64)
+	categray = models.ForeignKey('Categray')
 	summary = models.CharField(max_length = 256,blank = True,null=True)
 	content = models.TextField()
 	author = models.ForeignKey('BBS_user')
 	view_count = models.IntegerField()
 	ranking = models.IntegerField()
-	created_at = models.DateTimeField()
-	updated_at = models.DateTimeField()
+	created_at = models.DateTimeField(auto_now_add = True)
+	updated_at = models.DateTimeField(auto_now_add= True)
 
 	def __unicode__(self):
 		return self.title
@@ -20,6 +21,9 @@ class BBS(models.Model):
 class Categray(models.Model):
 	name = models.CharField(max_length=32,unique=True)
 	administrator = models.ForeignKey('BBS_user')
+
+	def __unicode__(self):
+		return self.name
 
 class BBS_user(models.Model):
 	user = models.OneToOneField(User)
