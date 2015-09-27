@@ -10,7 +10,7 @@
 
 		<hr>
 		{% get_comment_count for bbs as comment_count %}
-			{{ comment_count }}
+			<span class="glyphicon glyphicon-comment"></span> {{ comment_count }}
 
 		<hr>		
 		{% if user.is_authenticated %} 
@@ -22,7 +22,7 @@
 		    </form>
 
 		{% else %}
-		<p>如果要评论，请登录</p>
+		<p>如果要评论，请<a href="/login/">登录</a></p>
 		{% endif %}
 		
 

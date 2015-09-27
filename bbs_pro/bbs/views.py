@@ -18,7 +18,10 @@ def index(req):
 
 def detail(req,bbs_id):
 	bbs_list = BBS.objects.get(id = bbs_id)
-	return render_to_response('detail.html',{'bbs':bbs_list,'user':req.user})
+	categray = Categray.objects.all()
+	return render_to_response('detail.html',{'bbs':bbs_list,
+											'user':req.user,
+											'categray_list':categray})
 
 @csrf_exempt
 def sub_comment(req):
@@ -44,13 +47,15 @@ def bbs_pub(req):
 def bbs_sub(req):
 	author = BBS_user.objects.get(user=req.user)
 	content = req.POST.get('content')
+	categray_id = req.POST.get('categray_id')
 	BBS.objects.create(
-		title = 'TEST TITLE',
-		summary = 'Wuho',
+		title = req.POST['title'],
+		summary = req.POST['summary'],
 		content = content,
 		author = author,
 		view_count = 1,
 		ranking = 1,
+		categray_id = categray_id,
 		)
 	return HttpResponseRedirect('/')
 

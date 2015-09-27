@@ -24,10 +24,19 @@
 		    ]
         });
     </script>
-    <form method="post" action="/bbs_sub/">
-    	<textarea name="content"></textarea>
-    	<input type="submit" value="提交">
-    </form>
+    {% if user.is_authenticated %}
+	    <form method="post" style="margin-top:10px;" action="/bbs_sub/">
+	    	主题：<input type="text" name='title' size=50><br>
+	    	简介：<input type="text" name='summary' maxlength=200 size=100><br>
+	    	内容：<textarea name="content"></textarea><br>
+	    	类别：<input type="radio" name="categray_id" value="1" />技术
+			<input type="radio" name="categray_id" value="2" />工作
+			<input type="radio" name="categray_id" value="3" />创意<br>
+	    	<input type="submit" value="提交">
+	    </form>
+	{% else %}
+		<P>Please <a href="/login/"> login</a> to publish BBS</p>
+	{% endif %}
 	</div>
 
 {% endblock %}
