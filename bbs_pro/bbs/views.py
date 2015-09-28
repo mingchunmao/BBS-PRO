@@ -6,11 +6,21 @@ from django.template.context import RequestContext
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.comments.models import Comment
 from django.contrib.contenttypes.models import ContentType
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 # Create your views here.
 
 
 def index(req):
-	bbs_list = BBS.objects.all()
+	bbs = BBS.objects.all()
+	paginator = Paginator(bbs,5)
+	page = req.GET.get('page')
+	try:
+		bbs_list = paginator.page(page)
+	except PageNotAnInteger:
+		bbs_list = paginator.page(1)
+	except EmptyPage:
+		bbs_list = paginator.page(paginator.num_pages)
+		
 	categray = Categray.objects.all()
 	return render_to_response('index.html',{'bbs_list':bbs_list,
 											'user':req.user,

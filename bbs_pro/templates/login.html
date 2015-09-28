@@ -33,6 +33,7 @@
     <div class="container">
 
       <form class="form-signin" action="/acc_login/" method="post">
+        {% csrf_token %}
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="username" class="sr-only">Username</label>
         <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
@@ -47,8 +48,8 @@
       </form>
 
     </div> <!-- /container -->
-    <script src="/static/jquery/jquery.min.js"></script>
-    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
 
   </body>
 </html>

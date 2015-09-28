@@ -18,7 +18,8 @@
     <link href="/static/navbar-static-top.css" rel="stylesheet">
     <link href="/static/self.css" rel="stylesheet">
     <link href="/static/form.css" rel="stylesheet">
-
+    <script type="text/javascript" src="/static/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/myjquery.js"></script>
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <!-- <script src="../../assets/js/ie-emulation-modes-warning.js"></script> -->
@@ -59,7 +60,7 @@
            
           </ul>
           <ul class="nav navbar-nav navbar-right">
-             <li class="dropdown">
+            <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 {% if user.is_authenticated %}
                 {{ user.username }}
@@ -72,10 +73,7 @@
                 <li><a href="/logout/">logout</a></li> 
                 <li><a href="/bbs_pub/">Publish bbs</a></li>              
               </ul>
-            </li>
-            <!-- <li><a href="../navbar/">Default</a></li>
-            <li class="active"><a href="./">Static top <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Fixed top</a></li> -->
+            </li>            
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -94,14 +92,29 @@
         </div>
         {% endfor %}
       {% endblock %}
+      <!-- 页码、分页 -->
+      <div class='pagination'>
+        <span class="step-links">
+          {% if bbs_list.has_previous %}
+              <a href="?page={{ bbs_list.previous_page_number }}">previous</a>
+          {% endif %}
+
+          <span class="current">
+            Page {{ bbs_list.number }} of {{ bbs_list.paginator.num_pages }}.
+          </span>
+
+        {% if bbs_list.has_next %}
+            <a href="?page={{ bbs_list.next_page_number }}">next</a>
+        {% endif %}
+        </span>
+      </div>
     </div> <!-- /container -->
 
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/static/jquery/jquery.min.js"></script>
-    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
     
+    <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>    
   </body>
 </html>

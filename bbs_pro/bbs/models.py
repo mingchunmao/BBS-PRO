@@ -17,6 +17,9 @@ class BBS(models.Model):
 	def __unicode__(self):
 		return self.title
 
+	class Meta:
+		ordering = ['-created_at']
+
 
 class Categray(models.Model):
 	name = models.CharField(max_length=32,unique=True)

@@ -1,6 +1,7 @@
 {% extends 'index.html' %}
 {% load comments %}
 {% block page-content %}
+
 	
 	<div class="jumbotron contents">
 
@@ -22,11 +23,16 @@
 		    </form>
 
 		{% else %}
-		<p>如果要评论，请<a href="/login/">登录</a></p>
-		{% endif %}
-		
-
-		
+			<p>如果要评论，请<input type="button" id="comment_login" value="登录" ></p>
+			<div id="loginform" class="login_form" >
+				<form action="">
+					{% csrf_token %}
+					<span>用户名：</span><input id='username' type="text" name="username" size=20><br>
+					<span>密  码：</span><input id='password' type="password" name="password" size=20>					
+				</form>
+				<input id="logint" type="button" name="comment_submit" value="确定">
+			</div>
+		{% endif %}		
 		<br><br>
 		{% get_comment_list for bbs as comment_list %}
 		{% for comment in comment_list reversed %}

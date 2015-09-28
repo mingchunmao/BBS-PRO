@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 @csrf_exempt
-def acc_login(request):
+def acc_login(request):    
     username = request.POST['username']
     password = request.POST['password']
     user = authenticate(username=username, password=password)
@@ -17,14 +17,14 @@ def acc_login(request):
         return HttpResponseRedirect('/')
          
     else:
-        return HttpResponseRedirect('/login')
+        return HttpResponseRedirect('/login/')
 
 
 
 def Logout(request):
     # user = request['user']
     logout(request)
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
 def Login(request):
