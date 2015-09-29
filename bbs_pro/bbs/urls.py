@@ -9,5 +9,7 @@ urlpatterns = patterns('bbs.views',
     url(r'^sub_comment/$','sub_comment'),
     url(r'^bbs_pub/$','bbs_pub'),
     url(r'^bbs_sub/$','bbs_sub'),
-    url(r'^categray/(\d+)/$','categray'),
+    url(r'^categray/(\d+)/$','categray'), 
+    url(r'^chat_sub/$','chat_sub'),
+    url(r'^chat_pub/$','chat_pub'),
 )

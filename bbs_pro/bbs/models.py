@@ -34,3 +34,13 @@ class BBS_user(models.Model):
 	photo = models.ImageField(upload_to="photo/",default="photo/default.jpg")
 	def __unicode__(self):
 		return self.user.username
+
+class Chat(models.Model):
+	content = models.CharField(max_length=300)
+	author = models.ForeignKey(User)
+	submit_at = models.DateTimeField(auto_now_add=True)
+
+	def __unicode__(self):
+		return self.content
+	class Meta:
+		ordering = ['-submit_at']

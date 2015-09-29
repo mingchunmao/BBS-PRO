@@ -1,0 +1,58 @@
+<div class="container center-container-hx">
+      <div class="content-left">
+        {% block page-content %}
+        <!-- Main component for a primary marketing message or call to action -->
+          {% for bbs in bbs_list %}
+          <div class="jumbotron contents">
+            
+            <h4><a href = "/detail/{{bbs.id}}">{{ bbs.title }}</a></h4>
+            <p>{{ bbs.author }}</p><img src="{{ bbs.author.photo.url }}">
+            {% get_comment_count for bbs as comment_count %}
+            <span class="glyphicon glyphicon-comment"></span> {{ comment_count }}          
+          </div>
+          {% endfor %}
+        {% endblock %}
+        {% block pagination %}
+        <!-- 页码、分页 -->
+          <div class='pagination'>
+            <span class="step-links">
+              {% if bbs_list.has_previous %}
+                  <a href="?page={{ bbs_list.previous_page_number }}">上一页</a>
+              {% endif %}
+
+              <span class="current">
+                第 {{ bbs_list.number }} 页-共 {{ bbs_list.paginator.num_pages }} 页
+              </span>
+
+            {% if bbs_list.has_next %}
+                <a href="?page={{ bbs_list.next_page_number }}">下一页</a>
+            {% endif %}
+            </span>
+          </div>
+        {% endblock %}
+      </div> <!-- content-left -->
+      <div class="content-right">
+        <div class='chat-area'>
+          <div class="chat-title" >
+            <span class="title">新热聊天</span>
+          </div>
+          <div class="chat-window"></div>
+
+          <div class="chat-user">
+            {% if user.is_authenticated %}
+            {{ user.username }}
+            {% else %}
+            密名用户
+            {% endif %}
+          </div>
+          <div class="chat-input">
+            <div class="chat-input-left">
+              <textarea id="chat-content"></textarea>
+            </div>
+            <div class="chat-input-right">
+              <input type="submit" value="发送">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- /container -->

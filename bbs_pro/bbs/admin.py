@@ -12,6 +12,10 @@ class BBS_admin(admin.ModelAdmin):
 		return obj.author.signature
 	signature.short_description='hah'
 
+class Chat_admin(admin.ModelAdmin):
+	list_display = ('content','author','submit_at')
+
 admin.site.register(BBS,BBS_admin)
 admin.site.register(Categray)
 admin.site.register(BBS_user)
+admin.site.register(Chat,Chat_admin)

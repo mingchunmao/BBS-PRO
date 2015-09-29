@@ -1,10 +1,8 @@
-{% extends 'index.html' %}
-{% load comments %}
+{% include 'head.html' %}
+<div class="container center-container-hx">
 {% block page-content %}
-	
-
 	<div>
-	<script type="text/javascript" src="/static/tinymce/js/tinymce/tinymce.min.js"></script>
+	
     <script type="text/javascript">
         tinymce.init({
             selector: "textarea",
@@ -35,8 +33,21 @@
 	    	<input type="submit" value="提交">
 	    </form>
 	{% else %}
-		<P>Please <a href="/login/"> login</a> to publish BBS</p>
+		<p>如果要发表文章，请<input type="button" id="comment_login" value="登录" ></p>
+			<div id="loginform" class="login_form" >
+				<form action="">
+					{% csrf_token %}
+					<span>用户名：</span><input id='username' type="text" name="username" size=20><br>
+					<span>密  码：</span><input id='password' type="password" name="password" size=20>					
+				</form>
+				<input id="logint" type="button" name="comment_submit" value="确定">
+			</div>
 	{% endif %}
 	</div>
 
 {% endblock %}
+{% block pagination %}
+      <span></span>
+{% endblock %}
+</div>
+{% include 'footer.html' %}

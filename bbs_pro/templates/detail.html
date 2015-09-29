@@ -1,8 +1,6 @@
 {% extends 'index.html' %}
 {% load comments %}
-{% block page-content %}
-
-	
+{% block page-content %}	
 	<div class="jumbotron contents">
 
 		<h4>{{ bbs.title }}</h4>
@@ -17,9 +15,9 @@
 		{% if user.is_authenticated %} 
 		    <form action="/sub_comment/" method="POST">
 			    {% csrf_token %}
-			    <textarea  cols=80 rows=3 name="comment_comment"></textarea>
+			    <textarea cols=80 rows=3 name="comment_comment"></textarea>
 			    <input type="hidden" name="bbs_id" value="{{bbs.id}}" /><br>
-			    <input type="submit" name="Add comment" id = "id_submit" />
+			    <input type="submit" name="Add comment" id = "id_submit" value="确定"/>
 		    </form>
 
 		{% else %}
@@ -42,6 +40,9 @@
 			<hr>
 		{% endfor %}
 	</div>	
+	{% block pagination %}
+      <span></span>
+    {% endblock %}
 
 
 
