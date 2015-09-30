@@ -18,7 +18,8 @@ $(function(){
 			url : '/chat_sub/',
 			data : {content: $("#chat-content").val()},
 			type : 'post',
-			success: function(){				
+			success: function(){
+				$("#chat-content").reset();				
 				/*$.ajax({
 		            url: '/chat_pub/',
 		            type: 'post', 

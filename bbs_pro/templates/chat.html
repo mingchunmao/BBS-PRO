@@ -1,2 +1,7 @@
-{{ chat_list.author }}:{{ chat_list.submit_at }}<br>
-{{ chat_list.content }}<br>
+{% if chat_list %}
+<div class='newchat'> 
+	<span style="color:blue;">{{ chat_list.author }}</span>:<span>{{ chat_list.submit_at }}</span><br>
+    <span>{{ chat_list.content }}</span><br>  
+    <span style="display:none;">{{ chat_list.id }}</span>
+</div>
+{% endif %}

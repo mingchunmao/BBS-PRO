@@ -119,22 +119,31 @@
           <div class="chat-title" >
             <span class="title">新热聊天</span>
           </div>
-          <div class="chat-window">            
+          <div class="chat-window"> 
+           {% for chat_list in chat_list %} 
+            <div class='newchat'>             
+              <span style="color:blue;">{{ chat_list.author }}</span>:<span>{{ chat_list.submit_at }}</span><br>
+              <span>{{ chat_list.content }}</span><br>  
+              <span style="display:none;">{{ chat_list.id }}</span>
+            </div> 
+            {% endfor %}         
           </div>
-          <!--<script type="text/javascript">
+          <script type="text/javascript">
             $(function() {
-              setInterval("startRequest()",3000);  
+              setInterval("startRequest()",1000);  
               });
             function startRequest() { 
-                $.ajax({
+             /* alert(parseInt($(".newchat:last span:last").html())+1);*/
+              $.ajax({
                   url: '/chat_pub/',
-                  type: 'post', 
-                  success: function(data){
-                    $('.chat-window').append(data);
+                  type: 'post',
+                  data: {id : parseInt($(".newchat:last span:last").html())+1},
+                  success: function(data){  
+                    $(".chat-window").append(data);    
                   }
-                })
+                }) 
               }
-          </script>-->
+          </script>
 
           <div class="chat-user">
             {% if user.is_authenticated %}

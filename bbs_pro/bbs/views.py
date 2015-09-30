@@ -11,7 +11,6 @@ from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 import json
 # Create your views here.
 
-
 def index(req):
 	bbs = BBS.objects.all()
 	paginator = Paginator(bbs,5)
@@ -22,11 +21,13 @@ def index(req):
 		bbs_list = paginator.page(1)
 	except EmptyPage:
 		bbs_list = paginator.page(paginator.num_pages)
-
+	chat_list = Chat.objects.all()[0:5]
+	chat_list = chat_list[::-1]	
 	categray = Categray.objects.all()
 	return render_to_response('index.html',{'bbs_list':bbs_list,
 											'user':req.user,
-											'categray_list':categray})
+											'categray_list':categray,
+											'chat_list':chat_list})
 
 def detail(req,bbs_id):
 	bbs_list = BBS.objects.get(id = bbs_id)	
@@ -102,5 +103,11 @@ def chat_sub(req):
 
 @csrf_exempt
 def chat_pub(req):
-	chat_list = Chat.objects.all()[0]
-	return render_to_response('chat.html',{'chat_list':chat_list})
+	id = req.POST.get('id')
+	chat_list = Chat.objects.get(id = id)
+	if chat_list:	
+		return render_to_response('chat.html',{'chat_list':chat_list})
+	else:
+		return render_to_response('chat.html')
+	
+		
