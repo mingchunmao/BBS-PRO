@@ -49,7 +49,7 @@
           <ul id="menuactive" class="nav navbar-nav">
             <li class=""><a href="/">全部</a></li>
             {% for categray in categray_list %}
-            <!-- {% print categray.id code_id %} -->
+
             {% ifequal categray.id code_id %}                          
               <li class="active"><a href="/categray/{{categray.id}}/">{{categray.name}}</a></li>
             {% else %}

@@ -21,10 +21,11 @@ class Migration(migrations.Migration):
                 ('content', models.TextField()),
                 ('view_count', models.IntegerField()),
                 ('ranking', models.IntegerField()),
-                ('created_at', models.DateTimeField()),
-                ('updated_at', models.DateTimeField()),
+                ('created_at', models.DateTimeField(auto_now_add=True)),
+                ('updated_at', models.DateTimeField(auto_now_add=True)),
             ],
             options={
+                'ordering': ['-created_at'],
             },
             bases=(models.Model,),
         ),
@@ -51,10 +52,29 @@ class Migration(migrations.Migration):
             },
             bases=(models.Model,),
         ),
+        migrations.CreateModel(
+            name='Chat',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('content', models.CharField(max_length=300)),
+                ('submit_at', models.DateTimeField(auto_now_add=True)),
+                ('author', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+            ],
+            options={
+                'ordering': ['-submit_at'],
+            },
+            bases=(models.Model,),
+        ),
         migrations.AddField(
             model_name='bbs',
             name='author',
             field=models.ForeignKey(to='bbs.BBS_user'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='bbs',
+            name='categray',
+            field=models.ForeignKey(to='bbs.Categray'),
             preserve_default=True,
         ),
     ]

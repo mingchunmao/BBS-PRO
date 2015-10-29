@@ -43,7 +43,7 @@ INSTALLED_APPS = (
     #django自带的评论
     'django.contrib.comments',
     'django.contrib.sites',
-    'debugtools',
+    # 'debugtools',
 )
 
 MIDDLEWARE_CLASSES = (
